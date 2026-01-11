@@ -26,6 +26,7 @@ This is the frontend of a modern Doctor Appointment Booking System. Built with s
 ```text
 src/
 |── assets/      # Images and global styles
+|── context/     # Global States (AuthContext)
 ├── components/  # Reusable UI components
 ├── pages/       # Full page views
 └── types/       # TypeScript interfaces & enums
