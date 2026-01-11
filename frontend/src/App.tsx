@@ -1,7 +1,9 @@
 import "./App.css";
 
+const name: boolean = true;
+
 function App() {
-  return <></>;
+  return <>{name}</>;
 }
 
 export default App;
