@@ -23,26 +23,33 @@ This is the frontend of a modern Doctor Appointment Booking System. Built with s
 
 ## 📂 Project Structure
 
+````text
 src/
-|-- components # Reusable UI components
-|-- pages # Full page views
-|-- types # TypeScript interfaces & enums
-|-- assets # Images
+|── assets/      # Images and global styles
+├── components/  # Reusable UI components
+├── pages/       # Full page views
+└── types/       # TypeScript interfaces & enums
 
+```text
+
+---
+
+```text
 ## ⚙️ How to Run Locally
 
--[1] Clone the repository:
--Bash
-git clone https://github.com/IbrahimFullStackWebDev/doctors-appointments-frontend.git
+1. **Clone the repository:**
+```bash
+  git clone https://github.com/IbrahimFullStackWebDev/doctors-appointments-frontend.git
 
--[2] Install dependencies:
--Bash
-npm install
+2. **Install dependencies:**
+```bash
+  npm install
 
--[3] Run the development server:
--Bash
-npm run dev
+3. **Run the development server:**
+```bash
+  npm run dev
 
 ## Learning Journey
 
 -I am building this project to master TypeScript and React 19 through hands-on experience and real-world scenarios.
+````
