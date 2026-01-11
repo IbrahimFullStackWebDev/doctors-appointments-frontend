@@ -54,4 +54,4 @@ src/
 
 ## Learning Journey
 
--I am building this project to master TypeScript and React 19 through hands-on experience and real-world scenarios.
+- I am building this project to master TypeScript and React 19 through hands-on experience and real-world scenarios.
