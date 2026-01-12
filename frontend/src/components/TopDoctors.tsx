@@ -1,7 +1,6 @@
 import React from "react";
 import { doctors } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { it } from "node:test";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
@@ -14,9 +13,10 @@ const TopDoctors = () => {
         </p>
       </div>
 
-      <div className="w-2/3 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-        {doctors.map((item) => (
+      <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
+        {doctors.slice(0, 10).map((item) => (
           <div
+            key={item._id}
             className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             onClick={() => navigate("/doctors/" + item.speciality)}
           >

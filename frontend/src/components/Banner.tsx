@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const navigate = useNavigate();
   return (
-    <div className="mx-4 sm:mx-10 md:mx-20 lg:mx-30 flex flex-row items-center justify-between bg-blue-500 rounded-lg p-10 lg:px-12 lg:py-0">
+    <div className="flex flex-row items-center justify-between bg-blue-500 rounded-lg p-10 lg:px-12 lg:py-0">
       {/* lsft side */}
       <div className="flex flex-col items-start gap-10">
         <h4 className="text-5xl text-white leading-tight font-medium">

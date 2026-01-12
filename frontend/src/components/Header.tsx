@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="mx-4 sm:mx-10 md:mx-20 lg:mx-30 flex flex-col items-center gap-10">
+    <div className="flex flex-col items-center gap-10">
       <div className="w-full bg-blue-500 text-white flex flex-col lg:flex-row items-end justify-between mt-8 rounded-lg pt-25 px-4">
         {/* Left Side */}
         <div className="flex flex-col items-start gap-8 m-auto lg:mb-20">

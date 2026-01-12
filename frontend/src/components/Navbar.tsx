@@ -20,9 +20,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="mx-4 sm:mx-10 md:mx-20 lg:mx-30 flex flex-row items-center justify-between  py-4 border-b border-gray-500">
+      <div className="flex flex-row items-center justify-between  py-4 border-b border-gray-500">
         <img src={assets.logo} className="w-45" alt="Logo" />
-        <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700 font-semibold">
+        <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700">
           {navitems.map((item) => (
             <NavLink key={item.path} to={item.path}>
               <p className="text-gray-700 font-semibold">{item.lable}</p>
