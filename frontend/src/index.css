@@ -11,3 +11,6 @@
 * {
   font-family: Outfit, sans-serif, serif;
 }
+.grid-template-cols {
+  grid-template-columns: repeat(outfit, minmax(200, 1fr));
+}

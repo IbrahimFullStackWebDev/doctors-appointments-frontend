@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets.ts";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [uToken, setUToken] = useState<boolean>(false);
 
@@ -38,13 +39,22 @@ const Navbar = () => {
             />
             <img src={assets.dropdown_icon} alt="dropdown icon" />
             <div className="hidden flex flex-col items-start gap-3 text-gray-700 p-4 bg-gray-100 rounded-lg absolute top-16 right-30 group-hover:flex">
-              <p className="hover:text-gray-900 transition-all duration-300">
+              <p
+                className="hover:text-gray-900 transition-all duration-300"
+                onClick={() => navigate("/profile")}
+              >
                 My Profile
               </p>
-              <p className="hover:text-gray-900 transition-all duration-300">
+              <p
+                className="hover:text-gray-900 transition-all duration-300"
+                onClick={() => navigate("appointments")}
+              >
                 My Appointments
               </p>
-              <p className="hover:text-gray-900 transition-all duration-300">
+              <p
+                className="hover:text-gray-900 transition-all duration-300"
+                onClick={() => setUToken(false)}
+              >
                 Logout
               </p>
             </div>
