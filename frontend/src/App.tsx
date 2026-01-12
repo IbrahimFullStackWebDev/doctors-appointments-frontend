@@ -8,6 +8,7 @@ import MyAppointments from "./pages/MyAppointments";
 import MyProfile from "./pages/MyProfile";
 import Loign from "./pages/Loign";
 import Footer from "./components/Footer";
+import Appointments from "./pages/Appointments";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/appointments" element={<MyAppointments />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/login" element={<Loign />} />
+        <Route path="/appointments/:docId?" element={<Appointments />} />
       </Routes>
       <Footer />
     </div>

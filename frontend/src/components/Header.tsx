@@ -1,6 +1,7 @@
 import React from "react";
 import { assets, specialityData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { type SpecialityItem } from "../types/doctor";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Header = () => {
           <br /> schedule your appointment hassle-free.
         </p>
         <div className="w-full flex flex-row items-center justify-center px-8 gap-4 p-6 overflow-x-auto">
-          {specialityData.map((item) => (
+          {specialityData.map((item: SpecialityItem) => (
             <div
               key={item.id}
               className="flex-shrink-0 flex flex-col items-center gap-4 cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
