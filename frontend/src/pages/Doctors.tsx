@@ -43,7 +43,7 @@ const Doctors = () => {
             >
               <img
                 src={item.image}
-                className="bg-blue-300 rounded-lg"
+                className="bg-blue-100 rounded-lg hover:bg-blue-500 transition-all duration-500"
                 alt="doctor image"
               />
               <div className="flex flex-col items-start gap-2 px-4">

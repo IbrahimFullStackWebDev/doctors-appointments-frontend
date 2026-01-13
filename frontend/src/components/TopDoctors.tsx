@@ -19,11 +19,14 @@ const TopDoctors = () => {
           <div
             key={item._id}
             className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-            onClick={() => navigate("/doctors/" + item.speciality)}
+            onClick={() => {
+              navigate("/doctors/" + item.speciality);
+              scrollTo(0, 0);
+            }}
           >
             <img
               src={item.image}
-              className="bg-blue-300 rounded-lg"
+              className="bg-blue-100 rounded-lg"
               alt="doctor image"
             />
             <div className="flex flex-col items-start gap-2 px-4">
