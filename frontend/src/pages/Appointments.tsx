@@ -9,8 +9,8 @@ const Appointments = () => {
     (item) => item._id === docId
   );
   const [docSlots, setDocSlots] = useState<Slots[][]>([]);
-  const [dateIndex, setDateIndex] = useState<number>(0);
-  const [slotTime, setSlotTime] = useState<number>(0);
+  const [slotDateIndex, setSlotDateIndex] = useState<number>(0);
+  const [slotTimeIndex, setSlotTimeIndex] = useState<number>(0);
   const navigate = useNavigate();
 
   const filterdDoctors: Doctor[] =
@@ -118,11 +118,11 @@ const Appointments = () => {
                 docSlots.map((item, index) => (
                   <div
                     onClick={() => {
-                      setDateIndex(index);
+                      setSlotDateIndex(index);
                     }}
                     key={index}
                     className={`min-w-16 flex flex-col items-center border gap-1 border-gray-300 py-6 px-3 rounded-full cursor-pointer transition-all duration-300 ${
-                      index === dateIndex ? "bg-blue-500 text-white" : ""
+                      index === slotDateIndex ? "bg-blue-500 text-white" : ""
                     }`}
                   >
                     <p>{item[0].datetime.getDate()}</p>
@@ -132,12 +132,12 @@ const Appointments = () => {
             </div>
             <div className="w-full flex flex-row items-start gap-3 p-4 overflow-auto">
               {docSlots.length > 0 &&
-                docSlots[dateIndex].map((item, index) => (
+                docSlots[slotDateIndex].map((item, index) => (
                   <div
-                    onClick={() => setSlotTime(index)}
+                    onClick={() => setSlotTimeIndex(index)}
                     key={index}
                     className={`flex-shrink-0 flex flex-col items-center border gap-1 border-gray-300 py-3 px-8 rounded-full cursor-pointer transition-all duration-300 ${
-                      slotTime === index ? "bg-blue-500 text-white" : ""
+                      slotTimeIndex === index ? "bg-blue-500 text-white" : ""
                     }`}
                   >
                     <p className="whitespace-nowrap">
@@ -162,7 +162,7 @@ const Appointments = () => {
         <p className="text-gray-700">
           Simply browse through our extensive list of trusted doctors.
         </p>
-        <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 justify-items-center items-center object-cover">
+        <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 mt-10">
           {filterdDoctors.map((item) => (
             <div
               key={item._id}
