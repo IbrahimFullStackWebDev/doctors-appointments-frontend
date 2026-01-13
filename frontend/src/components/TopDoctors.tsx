@@ -1,7 +1,7 @@
 import React from "react";
 import { doctors } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { type Doctor } from "../types/doctor";
+import { type Doctor } from "../types/index";
 
 const TopDoctors = () => {
   const navigate = useNavigate();

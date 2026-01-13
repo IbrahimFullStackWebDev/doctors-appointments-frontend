@@ -1,5 +1,10 @@
 // src/types/index.ts
 
+export interface Slots {
+  datetime: Date;
+  time?: string;
+}
+
 export interface Address {
   line1: string;
   line2: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { assets, specialityData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { type SpecialityItem } from "../types/doctor";
+import { type SpecialityItem } from "../types/index";
 
 const Header = () => {
   const navigate = useNavigate();

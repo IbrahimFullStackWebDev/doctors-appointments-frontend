@@ -1,10 +1,10 @@
 import React from "react";
 import { doctors, specialityData } from "../assets/assets";
 import { useNavigate, useParams } from "react-router-dom";
-import { type Doctor, type SpecialityItem } from "../types/doctor";
+import { type Doctor, type SpecialityItem } from "../types/index";
 
 const Doctors = () => {
-  const { speciality } = useParams();
+  const { speciality } = useParams<{ speciality: string }>();
 
   const filterdDoctors: Doctor[] = speciality
     ? doctors.filter(
@@ -24,7 +24,11 @@ const Doctors = () => {
               className={`px-14 py-2 text-sm text-gray-700 border border-gray-300 rounded-md w-full text-left pl-2 cursor-pointer ${
                 speciality === item.speciality ? "bg-blue-100" : ""
               }`}
-              onClick={() => navigate("/doctors/" + item.speciality)}
+              onClick={() =>
+                speciality === item.speciality
+                  ? navigate("/doctors")
+                  : navigate("/doctors/" + item.speciality)
+              }
             >
               {item.speciality}
             </p>
