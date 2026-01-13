@@ -24,7 +24,7 @@ const Header = () => {
           </div>
           <button
             className="px-8 py-3 rounded-full bg-white cursor-pointer flex flex-row items-center text-black gap-3"
-            onClick={() => scrollTo(0, 300)}
+            onClick={() => scrollTo(0, 500)}
           >
             Book appointment <img src={assets.arrow_icon} alt="arrow icon" />
           </button>

@@ -14,7 +14,10 @@ const Banner = () => {
         </h4>
         <button
           className="px-10 py-4 bg-white rounded-full text-gray-900 cursor-pointer"
-          onClick={() => navigate("/login")}
+          onClick={() => {
+            navigate("/login");
+            scrollTo(0, 0);
+          }}
         >
           Create an account
         </button>
