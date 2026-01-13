@@ -10,16 +10,21 @@ const Loign = () => {
       <p className="text-sm text-gray-700">
         Please {status === "login" ? "sign up" : "login"} to book appointment
       </p>
-      <div className="w-full flex flex-col text-start gap-1">
-        <label htmlFor="full-name" className="text-gray-500 text-sm">
-          Full Name
-        </label>
-        <input
-          type="text"
-          className="w-full border border-gray-300 px-1 py-2 rounded-md text-sm text-gray-500"
-          id="full-name"
-        />
-      </div>
+      {status === "sign up" ? (
+        <div className="w-full flex flex-col text-start gap-1">
+          <label htmlFor="full-name" className="text-gray-500 text-sm">
+            Full Name
+          </label>
+          <input
+            type="text"
+            className="w-full border border-gray-300 px-1 py-2 rounded-md text-sm text-gray-500"
+            id="full-name"
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="w-full flex flex-col text-start gap-1">
         <label htmlFor="email" className="text-gray-500 text-sm">
           Email
