@@ -20,7 +20,7 @@ const TopDoctors = () => {
             key={item._id}
             className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             onClick={() => {
-              navigate("/doctors/" + item.speciality);
+              navigate(`/appointments/${item._id}`);
               scrollTo(0, 0);
             }}
           >
@@ -42,7 +42,10 @@ const TopDoctors = () => {
       </div>
       <button
         className="bg-blue-100 px-14 py-3 rounded-full cursor-pointer"
-        onClick={() => navigate("/doctors")}
+        onClick={() => {
+          navigate("/doctors");
+          scrollTo(0, 0);
+        }}
       >
         more
       </button>

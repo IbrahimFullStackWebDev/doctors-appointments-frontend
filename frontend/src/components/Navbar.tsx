@@ -25,7 +25,9 @@ const Navbar = () => {
         <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700">
           {navitems.map((item) => (
             <NavLink key={item.path} to={item.path}>
-              <p className="text-gray-700 font-semibold">{item.lable}</p>
+              <p className="text-gray-900 font-semibold text-sm">
+                {item.lable}
+              </p>
               <hr className="w-full border-none h-0.5 bg-gray-500 hidden" />
             </NavLink>
           ))}
