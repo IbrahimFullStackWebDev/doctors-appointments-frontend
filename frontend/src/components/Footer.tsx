@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="mt-100 mb-20 flex flex-col items-center gap-10">
+    <footer className="mt-100 mb-20 flex flex-col items-center gap-10">
       <div className="w-full flex flex-col sm:flex-row items-start justify-between gap-10">
         <div className="flex flex-col items-start gap-8">
           <img src={assets.logo} alt="logo" className="w-45" />
@@ -40,7 +40,7 @@ const Footer = () => {
           Copyright 2024 @ FullStack.dev - All Right Reserved.
         </p>
       </div>
-    </div>
+    </footer>
   );
 };
 

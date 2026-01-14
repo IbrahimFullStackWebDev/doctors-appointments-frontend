@@ -6,7 +6,7 @@ import { type SpecialityItem } from "../types/index";
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center gap-10">
+    <header className="flex flex-col items-center gap-10">
       <div className="w-full bg-blue-500 text-white flex flex-col lg:flex-row items-end justify-between mt-8 rounded-lg pt-25 px-4">
         {/* Left Side */}
         <div className="flex flex-col items-start gap-8 m-auto lg:mb-20">
@@ -58,7 +58,7 @@ const Header = () => {
           ))}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

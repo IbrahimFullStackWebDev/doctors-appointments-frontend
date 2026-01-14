@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-between  py-4 border-b border-gray-500">
+      <nav className="flex flex-row items-center justify-between  py-4 border-b border-gray-500">
         <img src={assets.logo} className="w-45" alt="Logo" />
         <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700">
           {navitems.map((item) => (
@@ -77,7 +77,7 @@ const Navbar = () => {
           className="w-6 lg:hidden mr-4 cursor-pointer"
           alt="Menu"
         />
-      </div>
+      </nav>
       <div
         className={`lg:hidden w-full h-screen transition-all duration-500 ${
           showMenu ? "block" : "hidden"
