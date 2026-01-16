@@ -56,3 +56,8 @@ src/
 ## Learning Journey
 
 - I am building this project to master TypeScript and React 19 through hands-on experience and real-world scenarios.
+
+5. **🤝 Linked Repository:**
+
+- You can find the Admin of this project here:https://github.com/IbrahimFullStackWebDev/doctors-appointments-admin.git
+- You can find the Backend of this project here:https://github.com/IbrahimFullStackWebDev/doctors-appointments-backend.git
