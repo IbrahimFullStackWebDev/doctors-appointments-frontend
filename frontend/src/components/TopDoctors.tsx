@@ -1,10 +1,11 @@
 import React from "react";
-import { doctors } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { type Doctor } from "../types/index";
+import { type DoctorDataType } from "../types/index";
+import { useAppContext } from "../context/AppContext";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
+  const { doctors } = useAppContext();
   return (
     <div className="w-full flex flex-col items-center gap-10 my-30">
       <div className="flex flex-col items-center gap-5">
@@ -15,12 +16,12 @@ const TopDoctors = () => {
       </div>
 
       <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-        {doctors.slice(0, 10).map((item: Doctor) => (
+        {doctors.slice(0, 10).map((item: DoctorDataType) => (
           <div
-            key={item._id}
+            key={item.id}
             className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             onClick={() => {
-              navigate(`/appointments/${item._id}`);
+              navigate(`/appointments/${item.id}`);
               scrollTo(0, 0);
             }}
           >
@@ -31,8 +32,17 @@ const TopDoctors = () => {
             />
             <div className="flex flex-col items-start gap-2 px-4">
               <div className="flex flex-row items-center gap-2">
-                <div className="p-1 rounded-full bg-green-500"></div>
-                <p className="text-sm text-gray-500">Available</p>
+                {item.available ? (
+                  <>
+                    <div className="p-1 rounded-full bg-green-500"></div>
+                    <p className="text-sm text-gray-500">Available</p>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-1 rounded-full bg-red-500"></div>
+                    <p className="text-sm text-gray-500">Unavailable</p>
+                  </>
+                )}
               </div>
               <p className="text-xl">{item.name}</p>
               <p className="text-gray-500">{item.speciality}</p>

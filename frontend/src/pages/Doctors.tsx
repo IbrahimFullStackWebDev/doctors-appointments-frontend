@@ -1,15 +1,19 @@
 import React from "react";
-import { doctors, specialityData } from "../assets/assets";
+import { specialityData } from "../assets/assets";
 import { useNavigate, useParams } from "react-router-dom";
-import { type Doctor, type SpecialityItem } from "../types/index";
+import { type DoctorDataType, type SpecialityItem } from "../types/index";
+import { useAppContext } from "../context/AppContext";
 
 const Doctors = () => {
   const { speciality } = useParams<{ speciality: string }>();
 
-  const filterdDoctors: Doctor[] = speciality
+  const { doctors } = useAppContext();
+
+  const filterdDoctors: DoctorDataType[] = speciality
     ? doctors.filter(
         (item) =>
-          item.speciality.toLocaleLowerCase() === speciality.toLocaleLowerCase()
+          item.speciality.toLocaleLowerCase() ===
+          speciality.toLocaleLowerCase(),
       )
     : doctors;
   const navigate = useNavigate();
@@ -37,9 +41,9 @@ const Doctors = () => {
         <div className="w-full flex-5 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
           {filterdDoctors.map((item) => (
             <div
-              key={item._id}
+              key={item.id}
               className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-              onClick={() => navigate("/appointments/" + item._id)}
+              onClick={() => navigate("/appointments/" + item.id)}
             >
               <img
                 src={item.image}
@@ -48,8 +52,17 @@ const Doctors = () => {
               />
               <div className="flex flex-col items-start gap-2 px-4">
                 <div className="flex flex-row items-center gap-2">
-                  <div className="p-1 rounded-full bg-green-500"></div>
-                  <p className="text-sm text-gray-500">Available</p>
+                  {item.available ? (
+                    <>
+                      <div className="p-1 rounded-full bg-green-500"></div>
+                      <p className="text-sm text-gray-500">Available</p>
+                    </>
+                  ) : (
+                    <>
+                      <div className="p-1 rounded-full bg-red-500"></div>
+                      <p className="text-sm text-gray-500">Unavailable</p>
+                    </>
+                  )}
                 </div>
                 <p className="text-xl">{item.name}</p>
                 <p className="text-gray-500">{item.speciality}</p>

@@ -9,10 +9,12 @@ import MyProfile from "./pages/MyProfile";
 import Loign from "./pages/Loign";
 import Footer from "./components/Footer";
 import Appointments from "./pages/Appointments";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="w-full px-4 sm:px-10 md:px-20 lg:px-30">
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

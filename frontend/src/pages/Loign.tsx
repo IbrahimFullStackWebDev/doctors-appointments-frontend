@@ -1,9 +1,66 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useAppContext } from "../context/AppContext";
+import { type ResponseType } from "../types/index.tsx";
+import { useNavigate } from "react-router-dom";
 
 const Loign = () => {
   const [status, setStatus] = useState<string>("login");
+  const { backendUrl, setUToken } = useAppContext();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(backendUrl);
+
+    try {
+      if (status === "sign up") {
+        const { data } = await axios.post<ResponseType>(
+          `${backendUrl}/api/user/register`,
+          {
+            name,
+            email,
+            password,
+          },
+        );
+        console.log(data);
+        if (data.success) {
+          toast.success(data.message);
+          navigate("/");
+          setUToken(data.uToken);
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        const { data } = await axios.post<ResponseType>(
+          `${backendUrl}/api/user/login`,
+          {
+            email,
+            password,
+          },
+        );
+        if (data.success) {
+          navigate("/");
+          setUToken(data.uToken);
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (error) {
+      const err = error as Error;
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
   return (
-    <div className="w-full max-w-[400px] flex flex-col items-start gap-3 border border-gray-300 rounded-lg m-auto mt-10 shadow-lg px-8 py-10">
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      className="w-full max-w-[400px] flex flex-col items-start gap-3 border border-gray-300 rounded-lg m-auto mt-10 shadow-lg px-8 py-10"
+    >
       <h1 className="text-2xl text-gray-600 font-medium">
         {status === "login" ? "Login" : "Create an Account"}
       </h1>
@@ -19,6 +76,7 @@ const Loign = () => {
             type="text"
             className="w-full border border-gray-300 px-1 py-2 rounded-md text-sm text-gray-500"
             id="full-name"
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
       ) : (
@@ -34,6 +92,7 @@ const Loign = () => {
           required
           className="w-full border border-gray-300 px-1 py-2 rounded-md text-sm text-gray-500"
           id="email"
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="w-full flex flex-col text-start gap-1">
@@ -45,6 +104,7 @@ const Loign = () => {
           required
           className="w-full border border-gray-300 px-1 py-2 rounded-md text-sm text-gray-500"
           id="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <button className="w-full py-2 text-center bg-blue-500 text-white text-lg rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-300">
@@ -60,10 +120,10 @@ const Loign = () => {
             status === "login" ? setStatus("sign up") : setStatus("login")
           }
         >
-          {status === "login" ? "Login here" : "Sign up here"}
+          {status === "login" ? "Sign up here" : "Login here"}
         </span>
       </p>
-    </div>
+    </form>
   );
 };
 
