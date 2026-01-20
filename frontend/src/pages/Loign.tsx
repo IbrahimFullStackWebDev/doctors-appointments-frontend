@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
-import { type ResponseType } from "../types/index.tsx";
+import { type ResponseType, type UserType } from "../types/index.tsx";
 import { useNavigate } from "react-router-dom";
 
 const Loign = () => {
   const [status, setStatus] = useState<string>("login");
-  const { backendUrl, setUToken } = useAppContext();
+  const { backendUrl, setUToken, setUserInfo, userInfo } = useAppContext();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -15,7 +15,6 @@ const Loign = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(backendUrl);
 
     try {
       if (status === "sign up") {
@@ -27,11 +26,13 @@ const Loign = () => {
             password,
           },
         );
-        console.log(data);
         if (data.success) {
           toast.success(data.message);
           navigate("/");
-          setUToken(data.uToken);
+          setUToken(data.uToken as string);
+          setUserInfo(data.user as UserType);
+          localStorage.setItem("uToken", data.uToken as string);
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
         } else {
           toast.error(data.message);
         }
@@ -43,9 +44,13 @@ const Loign = () => {
             password,
           },
         );
+
         if (data.success) {
           navigate("/");
-          setUToken(data.uToken);
+          setUToken(data.uToken as string);
+          setUserInfo(data.user as UserType);
+          localStorage.setItem("uToken", data.uToken as string);
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
         } else {
           toast.error(data.message);
         }

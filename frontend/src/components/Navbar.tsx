@@ -127,6 +127,7 @@ const Navbar = () => {
               setShowMenu((prev) => !prev);
               setUToken(null);
               localStorage.removeItem("uToken");
+              localStorage.removeItem("userInfo");
             }}
           >
             <p className="text-gray-700 font-semibold px-8 py-2 rounded-md">

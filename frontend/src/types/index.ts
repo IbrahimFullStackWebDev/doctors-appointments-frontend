@@ -8,8 +8,8 @@ export interface Slots {
 }
 
 export interface Address {
-  line1: string;
-  line2: string;
+  line1?: string;
+  line2?: string;
 }
 
 export interface UserType {
@@ -17,10 +17,10 @@ export interface UserType {
   name: string;
   image: string;
   email: string;
-  phone: string | null;
-  gender: string | null;
-  dob: number | null;
-  address: Address | null;
+  phone: string;
+  gender: string;
+  dob: number;
+  address: Address;
 }
 
 export interface DoctorDataType {
@@ -47,12 +47,16 @@ export interface AppContextType {
   uToken: string;
   setUToken: (uToken: string | null) => void;
   doctors: DoctorDataType[];
+  setUserInfo: React.Dispatch<React.SetStateAction<UserType>>;
+  userInfo: UserType;
 }
 export interface ResponseType {
   success: boolean;
   message?: string;
   uToken?: string;
   doctors?: DoctorDataType[];
+  user?: UserType;
+  imageUrl?: string;
 }
 export interface BookAppointmentsType {
   userId?: number;

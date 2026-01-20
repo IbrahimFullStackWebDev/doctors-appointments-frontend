@@ -9,6 +9,7 @@ import {
   type AppContextType,
   type DoctorDataType,
   type ResponseType,
+  type UserType,
 } from "../types/index.tsx";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -17,17 +18,14 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [doctors, setDoctors] = useState<DoctorDataType[]>([]);
+  const [userInfo, setUserInfo] = useState<UserType | null>(
+    localStorage.getItem("userInfo")
+      ? (JSON.parse(localStorage.getItem("userInfo") as string) as UserType)
+      : null,
+  );
   const [uToken, setUToken] = useState<string>(
     localStorage.getItem("uToken") || "",
   );
-
-  useEffect(() => {
-    if (uToken) {
-      localStorage.setItem("uToken", uToken);
-    } else {
-      localStorage.removeItem("uToken");
-    }
-  }, [uToken]);
 
   useEffect(() => {
     const getDoctors = async () => {
@@ -54,6 +52,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     uToken: uToken,
     setUToken,
     doctors,
+    setUserInfo,
+    userInfo,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
