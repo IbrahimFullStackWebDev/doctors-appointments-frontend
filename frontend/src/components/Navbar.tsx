@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext.tsx";
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { uToken, setUToken } = useAppContext();
+  const { uToken, setUToken, userInfo } = useAppContext();
 
   const navitems: NavItems[] = [
     { path: "/", lable: "HOME" },
@@ -39,7 +39,7 @@ const Navbar = () => {
           <div className="flex flex-row items-center gap-3 p-2 cursor-pointer realtive group">
             <img
               className="hidden lg:block w-10 rounded-full"
-              src={assets.profile_pic}
+              src={userInfo.image}
               alt="profile image"
             />
             <img
