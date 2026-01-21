@@ -50,6 +50,16 @@ export interface AppContextType {
   setUserInfo: React.Dispatch<React.SetStateAction<UserType>>;
   userInfo: UserType;
 }
+
+export interface UserAppointmentInfo {
+  AppointmentsInfo: BookAppointmentsType;
+  doctorInfo: {
+    image: string;
+    name: string;
+    speciality: string;
+    address: Address;
+  };
+}
 export interface ResponseType {
   success: boolean;
   message?: string;
@@ -57,8 +67,10 @@ export interface ResponseType {
   doctors?: DoctorDataType[];
   user?: UserType;
   imageUrl?: string;
+  userAppointments?: UserAppointmentInfo[];
 }
 export interface BookAppointmentsType {
+  id: number;
   userId?: number;
   doctorId: number;
   slotDate: string;
