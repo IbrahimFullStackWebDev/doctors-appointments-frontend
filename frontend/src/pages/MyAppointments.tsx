@@ -3,12 +3,91 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useAppContext } from "../context/AppContext";
 import type { ResponseType, UserAppointmentInfo } from "../types";
+import { useSearchParams } from "react-router-dom";
 
 const MyAppointments = () => {
   const { backendUrl, uToken } = useAppContext();
   const [appointments, setAppointments] = useState<UserAppointmentInfo[]>();
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const success = searchParams.get("success");
+  const appointmentId = searchParams.get("appointmentId");
+
+  const getUserAppointments = async () => {
+    try {
+      const { data } = await axios.post<ResponseType>(
+        `${backendUrl}/api/user/appointments`,
+        {},
+        { headers: { uToken: uToken } },
+      );
+      if (data.success) {
+        setAppointments(data.userAppointments);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const err = error as Error;
+      toast.error(err.message);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (uToken) {
+      getUserAppointments();
+    }
+  }, [uToken]);
+
+  const updatePaymentStatus = async () => {
+    try {
+      const { data } = await axios.post<ResponseType>(
+        backendUrl + "/api/user/update-payment",
+        { success, appointmentId },
+        { headers: { uToken } },
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        getUserAppointments();
+        setSearchParams({});
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const err = error as Error;
+      toast.error(err.message);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (success && appointmentId && uToken) {
+      updatePaymentStatus();
+    }
+  }, [success, appointmentId, uToken]);
+
+  const payStripe = async (appointmentId: number, doctorName: string) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/user/payment-stripe",
+        { appointmentId, doctorName },
+        { headers: { uToken } },
+      );
+
+      if (data.success) {
+        const { session_url } = data;
+        window.location.replace(session_url);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const err = error as Error;
+      toast.error(err.message);
+      console.log(error);
+    }
+  };
 
   const cancelAppointment = async (appointmentID: number) => {
     try {
@@ -44,27 +123,6 @@ const MyAppointments = () => {
     }
   };
 
-  useEffect(() => {
-    const getUserAppointments = async () => {
-      try {
-        const { data } = await axios.post<ResponseType>(
-          `${backendUrl}/api/user/appointments`,
-          {},
-          { headers: { uToken: uToken } },
-        );
-        if (data.success) {
-          setAppointments(data.userAppointments);
-        } else {
-          toast.error(data.message);
-        }
-      } catch (error) {
-        const err = error as Error;
-        toast.error(err.message);
-        console.log(error);
-      }
-    };
-    getUserAppointments();
-  }, []);
   return (
     appointments && (
       <div className="w-full mt-20 flex flex-col items-start gap-4">
@@ -113,7 +171,15 @@ const MyAppointments = () => {
                 {item.AppointmentsInfo.status === "scheduled" ? (
                   item.AppointmentsInfo.payment === false ? (
                     <>
-                      <button className="w-full py-2 px-10 text-sm rounded-md bg-blue-500 text-white hover:bg-blue-700 transition-all duration-300 cursor-pointer">
+                      <button
+                        onClick={() =>
+                          payStripe(
+                            item.AppointmentsInfo.id,
+                            item.doctorInfo.name,
+                          )
+                        }
+                        className="w-full py-2 px-10 text-sm rounded-md bg-blue-500 text-white hover:bg-blue-700 transition-all duration-300 cursor-pointer"
+                      >
                         Pay
                       </button>
                       <button
@@ -127,7 +193,9 @@ const MyAppointments = () => {
                       </button>
                     </>
                   ) : (
-                    <p className="text-blue-500">Paid</p>
+                    <p className="flex-1 w-full text-center py-2 px-10 border text-sm rounded-md border-blue-300  text-blue-500 cursor-not-allowed">
+                      Paid
+                    </p>
                   )
                 ) : item.AppointmentsInfo.status === "cancelled" ? (
                   <p className="flex-1 w-full text-center py-2 px-10 border text-sm rounded-md border-red-300  text-red-500 cursor-not-allowed">
@@ -144,7 +212,7 @@ const MyAppointments = () => {
         {showModal && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl p-6 w-full max-w-sm shadow-2xl transform transition-all animate-in fade-in zoom-in duration-200">
-              <h3 className="text-xl font-semibold text-red-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Confirm Cancellation
               </h3>
               <p className="text-gray-500 mb-6">
