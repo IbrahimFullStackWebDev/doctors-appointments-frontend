@@ -49,12 +49,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
   const value = {
     backendUrl,
-    uToken: uToken,
+    uToken,
     setUToken,
     doctors,
     setUserInfo,
     userInfo,
-  };
+  } as AppContextType;
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

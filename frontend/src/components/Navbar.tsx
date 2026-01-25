@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { uToken, setUToken, userInfo, setUserInfo } = useAppContext();
+  console.log(userInfo);
 
   const navitems: NavItems[] = [
     { path: "/", label: "HOME" },
@@ -27,8 +28,8 @@ const Navbar = () => {
       <nav className="flex flex-row items-center justify-between  py-4 border-b border-gray-500">
         <img src={assets.logo} className="w-45" alt="Logo" />
         <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700">
-          {navitems.map((item) => (
-            <NavLink key={item.path} to={item.path}>
+          {navitems.map((item, index) => (
+            <NavLink key={index} to={item.path}>
               <p className="text-gray-900 font-semibold text-sm">
                 {item.label}
               </p>
@@ -49,8 +50,9 @@ const Navbar = () => {
               alt="dropdown icon"
             />
             <div className="w-[200px] hidden z-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-10 right-0 group-hover:flex">
-              {userMenuItem.map((item) => (
+              {userMenuItem.map((item, index) => (
                 <p
+                  key={index}
                   className="hover:text-gray-900 transition-all duration-300"
                   onClick={() => navigate(item.path)}
                 >
@@ -133,7 +135,7 @@ const Navbar = () => {
               }}
             >
               <p className="text-gray-700 font-semibold px-8 py-2 rounded-md">
-                LOGOUT
+                Logout
               </p>
             </NavLink>
           )}

@@ -11,6 +11,7 @@ const MyProfile = () => {
   const [updatedData, setUpdatedData] = useState<UserType>(userInfo);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [image, setImage] = useState<File | null>(null);
+  console.log(updatedData);
   const handleSubmit = async () => {
     setLoading(true);
     const formData = new FormData();
@@ -227,8 +228,12 @@ const MyProfile = () => {
             <div className="w-full flex flex-row items-center justify-between">
               <p className="text-gray-900">Address:</p>
               <div className="flex flex-col items-end gap-2">
-                <p className="text-gray-900">{updatedData.address.line1}</p>
-                <p className="text-gray-900">{updatedData.address.line2}</p>
+                <p className="text-gray-900">
+                  {updatedData.address.line1 || ""}
+                </p>
+                <p className="text-gray-900">
+                  {updatedData.address.line2 || ""}
+                </p>
               </div>
             </div>
           </div>

@@ -48,11 +48,14 @@ const Login = () => {
         );
 
         if (data.success) {
+          toast.success(data.message);
           navigate("/");
+
           setUToken(data.uToken as string);
           setUserInfo(data.user as UserType);
+
           localStorage.setItem("uToken", data.uToken as string);
-          localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          localStorage.setItem("userInfo", JSON.stringify(data.user));
         } else {
           toast.error(data.message);
         }
