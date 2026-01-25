@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { assets } from "../assets/assets.ts";
 import { NavLink, useNavigate } from "react-router-dom";
 import { type NavItems } from "../types/index.ts";
@@ -10,15 +10,15 @@ const Navbar = () => {
   const { uToken, setUToken, userInfo } = useAppContext();
 
   const navitems: NavItems[] = [
-    { path: "/", lable: "HOME" },
-    { path: "/doctors", lable: "ALL DOCTORS" },
-    { path: "/about", lable: "ABOUT" },
-    { path: "/contact", lable: "CONTACT" },
+    { path: "/", label: "HOME" },
+    { path: "/doctors", label: "ALL DOCTORS" },
+    { path: "/about", label: "ABOUT" },
+    { path: "/contact", label: "CONTACT" },
   ];
 
   const userMenuItem: NavItems[] = [
-    { path: "/profile", lable: "PROFILE" },
-    { path: "/my-appointments", lable: "MY APPOINTMENTS" },
+    { path: "/profile", label: "PROFILE" },
+    { path: "/my-appointments", label: "MY APPOINTMENTS" },
   ];
 
   return (
@@ -29,17 +29,17 @@ const Navbar = () => {
           {navitems.map((item) => (
             <NavLink key={item.path} to={item.path}>
               <p className="text-gray-900 font-semibold text-sm">
-                {item.lable}
+                {item.label}
               </p>
               <hr className="w-full border-none h-0.5 bg-gray-500 hidden" />
             </NavLink>
           ))}
         </ul>
         {uToken ? (
-          <div className="flex flex-row items-center gap-3 p-2 cursor-pointer realtive group">
+          <div className="flex flex-row items-center gap-3 p-2 cursor-pointer relative group">
             <img
               className="hidden lg:block w-10 rounded-full"
-              src={userInfo.image}
+              src={userInfo.image || assets.upload_area}
               alt="profile image"
             />
             <img
@@ -47,7 +47,7 @@ const Navbar = () => {
               className="hidden lg:block"
               alt="dropdown icon"
             />
-            <div className="hidden flex flex-col items-start gap-3 text-gray-700 p-4 bg-gray-100 rounded-lg absolute top-16 right-30 group-hover:flex">
+            <div className="w-[200px] hidden z-index-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-12 right-0 group-hover:flex">
               <p
                 className="hover:text-gray-900 transition-all duration-300"
                 onClick={() => navigate("/profile")}
@@ -66,6 +66,8 @@ const Navbar = () => {
                   setUToken(null);
                   navigate("/");
                   localStorage.removeItem("uToken");
+                  localStorage.removeItem("userInfo");
+                  setShowMenu(false);
                 }}
               >
                 Logout
@@ -103,7 +105,7 @@ const Navbar = () => {
               onClick={() => setShowMenu((prev) => !prev)}
             >
               <p className="text-gray-700 font-semibold group-[.active]:bg-blue-500 group-[.active]:text-white px-8 py-2 rounded-md">
-                {item.lable}
+                {item.label}
               </p>
             </NavLink>
           ))}
@@ -116,24 +118,25 @@ const Navbar = () => {
                 onClick={() => setShowMenu((prev) => !prev)}
               >
                 <p className="text-gray-700 font-semibold group-[.active]:bg-blue-500 group-[.active]:text-white px-8 py-2 rounded-md">
-                  {item.lable}
+                  {item.label}
                 </p>
               </NavLink>
             ))}
-
-          <NavLink
-            to={"/"}
-            onClick={() => {
-              setShowMenu((prev) => !prev);
-              setUToken(null);
-              localStorage.removeItem("uToken");
-              localStorage.removeItem("userInfo");
-            }}
-          >
-            <p className="text-gray-700 font-semibold px-8 py-2 rounded-md">
-              LOGOUT
-            </p>
-          </NavLink>
+          {uToken && (
+            <NavLink
+              to={"/"}
+              onClick={() => {
+                setShowMenu((prev) => !prev);
+                setUToken(null);
+                localStorage.removeItem("uToken");
+                localStorage.removeItem("userInfo");
+              }}
+            >
+              <p className="text-gray-700 font-semibold px-8 py-2 rounded-md">
+                LOGOUT
+              </p>
+            </NavLink>
+          )}
         </ul>
       </div>
     </>

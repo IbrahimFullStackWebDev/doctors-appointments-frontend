@@ -1,6 +1,6 @@
 export interface NavItems {
   path: string;
-  lable: string;
+  label: string;
 }
 export interface Slots {
   datetime: Date;
