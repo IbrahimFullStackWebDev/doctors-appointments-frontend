@@ -1,9 +1,6 @@
-import { assets, specialityData } from "../assets/assets";
-import { useNavigate } from "react-router-dom";
-import { type SpecialityItem } from "../types/index";
+import { assets } from "../assets/assets";
 
 const Header = () => {
-  const navigate = useNavigate();
   return (
     <header className="flex flex-col items-center gap-10">
       <div className="w-full bg-blue-500 text-white flex flex-col lg:flex-row items-end justify-between mt-8 rounded-lg pt-25 px-4">
@@ -45,26 +42,6 @@ const Header = () => {
           Simply browse through our extensive list of trusted doctors,
           <br /> schedule your appointment hassle-free.
         </p>
-        <div className="w-full flex flex-row items-center justify-center px-8 gap-4 p-6 overflow-x-auto">
-          {specialityData.map((item: SpecialityItem) => (
-            <div
-              key={item.id}
-              className="flex-shrink-0 flex flex-col items-center gap-4 cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-              onClick={() => {
-                navigate("/doctors/" + item.speciality);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <img
-                src={item.image}
-                id="speciality"
-                className="w-25"
-                alt={item.speciality}
-              />
-              <p className="text-gray-700 text-sm">{item.speciality}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </header>
   );

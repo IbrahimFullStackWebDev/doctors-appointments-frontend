@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useAppContext } from "../context/AppContext";
-import { type ResponseType, type UserType } from "../types/index.tsx";
+import { useAppContext } from "../context/AppContext.tsx";
+import { type ResponseType, type UserType } from "../types/index.ts";
 import { useNavigate } from "react-router-dom";
 
-const Loign = () => {
+const Login = () => {
   const [status, setStatus] = useState<string>("login");
+  const [loading, setLoading] = useState<boolean>(false);
   const { backendUrl, setUToken, setUserInfo, userInfo } = useAppContext();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -15,6 +16,7 @@ const Loign = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       if (status === "sign up") {
@@ -32,7 +34,7 @@ const Loign = () => {
           setUToken(data.uToken as string);
           setUserInfo(data.user as UserType);
           localStorage.setItem("uToken", data.uToken as string);
-          localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          localStorage.setItem("userInfo", JSON.stringify(data.user));
         } else {
           toast.error(data.message);
         }
@@ -59,6 +61,8 @@ const Loign = () => {
       const err = error as Error;
       console.log(err);
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -112,8 +116,17 @@ const Loign = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button className="w-full py-2 text-center bg-blue-500 text-white text-lg rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-300">
-        {status === "login" ? "Login" : "Create an account"}
+      <button
+        disabled={loading}
+        className="w-full flex justify-center items-center py-2 text-center bg-blue-500 text-white text-lg rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-300"
+      >
+        {loading ? (
+          <div className="w-6 h-6 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
+        ) : status === "login" ? (
+          "Login"
+        ) : (
+          "Create an account"
+        )}
       </button>
       <p className="text-sm text-gray-500">
         {status === "login"
@@ -132,4 +145,4 @@ const Loign = () => {
   );
 };
 
-export default Loign;
+export default Login;
