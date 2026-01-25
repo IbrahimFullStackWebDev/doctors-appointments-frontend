@@ -7,10 +7,12 @@ import type { ResponseType, UserType } from "../types";
 
 const MyProfile = () => {
   const { userInfo, setUserInfo, backendUrl, uToken } = useAppContext();
+  const [loading, setLoading] = useState(false);
   const [updatedData, setUpdatedData] = useState<UserType>(userInfo);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [image, setImage] = useState<File | null>(null);
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = new FormData();
     if (image) {
       formData.append("image", image);
@@ -48,6 +50,8 @@ const MyProfile = () => {
       const err = error as Error;
       toast.error(err.message);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -57,17 +61,15 @@ const MyProfile = () => {
     >
       {isEdit ? (
         <>
-          <label htmlFor="image" className="relative cursor-pointer">
+          <label htmlFor="image" className="relative cursor-pointer group">
             <img
               src={image ? URL.createObjectURL(image) : updatedData.image}
-              className="w-35 opacity-75"
+              className={`w-35 rounded-lg transition-all duration-300 ${isEdit ? "group-hover:opacity-50 border-2 border-dashed border-blue-400" : ""}`}
               alt="profile image"
             />
-            <img
-              src={assets.upload_icon}
-              className="w-18 absolute top-10 left-8"
-              alt=""
-            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <img src={assets.upload_icon} className="w-12" alt="" />
+            </div>
             <input
               type="file"
               id="image"
@@ -233,8 +235,8 @@ const MyProfile = () => {
           <div className="w-[350px] flex flex-col items-start gap-4">
             <p className="text-gray-500 text-sm underline">BASIC INFORMATION</p>
             <div className="w-full flex flex-row items-center justify-between">
+              <p className="text-gray-700">Gender:</p>
               <p className="text-gray-700">{updatedData.gender}</p>
-              <p className="text-gray-700">Male:</p>
             </div>
             <div className="w-full flex flex-row items-center justify-between">
               <p className="text-gray-700">Birthday:</p>
@@ -246,10 +248,20 @@ const MyProfile = () => {
         </>
       )}
       <button
+        disabled={loading}
         onClick={() => (isEdit ? handleSubmit() : setIsEdit(true))}
-        className="px-6 py-3 border border-blue-500 rounded-full cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:text-white"
+        className="px-6 py-3 flex items-center gap-2 border border-blue-500 rounded-full cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:text-white group"
       >
-        {isEdit ? "Save Information" : "Edit"}
+        {loading ? (
+          <>
+            <div className="w-4 h-4 border-2 border-t-transparent  border-blue-500 group-hover:border-white group-hover:border-t-blue-500 animate-spin rounded-full group-hover:border-white"></div>
+            Saving...
+          </>
+        ) : isEdit ? (
+          "Save Information"
+        ) : (
+          "Edit"
+        )}
       </button>
     </form>
   );

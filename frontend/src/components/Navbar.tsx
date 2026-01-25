@@ -17,8 +17,8 @@ const Navbar = () => {
   ];
 
   const userMenuItem: NavItems[] = [
-    { path: "/profile", label: "PROFILE" },
-    { path: "/my-appointments", label: "MY APPOINTMENTS" },
+    { path: "/my-profile", label: "My Profile" },
+    { path: "/my-appointments", label: "My Appointments" },
   ];
 
   return (
@@ -36,7 +36,7 @@ const Navbar = () => {
           ))}
         </ul>
         {uToken ? (
-          <div className="flex flex-row items-center gap-3 p-2 cursor-pointer relative group">
+          <div className="flex flex-row items-center gap-3 px-4 cursor-pointer relative group">
             <img
               className="hidden lg:block w-10 rounded-full"
               src={userInfo.image || assets.upload_area}
@@ -47,19 +47,16 @@ const Navbar = () => {
               className="hidden lg:block"
               alt="dropdown icon"
             />
-            <div className="w-[200px] hidden z-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-12 right-0 group-hover:flex">
-              <p
-                className="hover:text-gray-900 transition-all duration-300"
-                onClick={() => navigate("/profile")}
-              >
-                My Profile
-              </p>
-              <p
-                className="hover:text-gray-900 transition-all duration-300"
-                onClick={() => navigate("/my-appointments")}
-              >
-                My Appointments
-              </p>
+            <div className="w-[200px] hidden z-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-10 right-0 group-hover:flex">
+              {userMenuItem.map((item) => (
+                <p
+                  className="hover:text-gray-900 transition-all duration-300"
+                  onClick={() => navigate(item.path)}
+                >
+                  {item.label}
+                </p>
+              ))}
+
               <p
                 className="hover:text-gray-900 transition-all duration-300"
                 onClick={() => {
