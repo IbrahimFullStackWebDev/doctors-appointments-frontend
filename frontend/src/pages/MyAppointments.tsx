@@ -50,7 +50,16 @@ const MyAppointments = () => {
 
       if (data.success) {
         toast.success(data.message);
-        getUserAppointments();
+        setAppointments((prev) =>
+          prev?.map((item) =>
+            item.AppointmentsInfo.id === Number(appointmentId)
+              ? {
+                  ...item,
+                  AppointmentsInfo: { ...item.AppointmentsInfo, payment: true },
+                }
+              : item,
+          ),
+        );
         setSearchParams({});
       } else {
         toast.error(data.message);
