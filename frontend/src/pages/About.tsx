@@ -1,4 +1,3 @@
-import React from "react";
 import { assets } from "../assets/assets";
 
 const About = () => {
@@ -42,25 +41,22 @@ const About = () => {
         <p className="text-2xl text-gray-700">
           WHY <span className="text-gray-900 font-medium">CHOOSE US</span>
         </p>
-        <div className="w-full flex flex-col md:flex-row items-center justify-between">
-          <div
-            className="flex w-full flex-col items-start gap-4 border border-gray-300  text-gray-700 py-15
-        px-20 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-500"
-          >
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center mb-20">
+          <div className="flex w-full flex-col items-start gap-4 border border-gray-300 text-gray-700 p-10 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-500">
             <p className="text-lg font-medium">EFFICIENCY:</p>
             <p className="text-sm">
               Streamlined appointment scheduling that fits into your busy
               lifestyle.
             </p>
           </div>
-          <div className="flex w-full flex-col items-start gap-4 border border-gray-300 py-15 px-20 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-500">
+          <div className="flex w-full flex-col items-start gap-4 border border-gray-300 cursor-pointer p-10 hover:bg-blue-500 hover:text-white transition-all duration-500">
             <p className="text-lg font-medium">CONVENIENCE:</p>
             <p className="text-sm">
               Access to a network of trusted healthcare professionals in your
               area.
             </p>
           </div>
-          <div className="flex w-full flex-col items-start gap-4 border border-gray-300 py-15 px-20 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-500">
+          <div className="flex w-full flex-col items-start gap-4 border border-gray-300 cursor-pointer p-10 hover:bg-blue-500 hover:text-white transition-all duration-500">
             <p className="text-lg font-medium">PERSONALIZATION:</p>
             <p className="text-sm">
               Tailored recommendations and reminders to help you stay on top of
