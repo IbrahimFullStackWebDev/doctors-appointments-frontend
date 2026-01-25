@@ -42,6 +42,10 @@ const Appointments = () => {
   ];
 
   useEffect(() => {
+    setSlotTimeIndex(0);
+  }, [slotDateIndex]);
+
+  useEffect(() => {
     const getSlots = () => {
       const today: Date = new Date();
       const allSolts: Slots[][] = [];
@@ -85,6 +89,11 @@ const Appointments = () => {
 
   const bookAppointment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!uToken) {
+      toast.warning("Please login to book an appointment");
+      return navigate("/login");
+    }
     const bookedAppointmentInfo: BookAppointmentsType = {
       doctorId: Number(doctorInfo?.id) as number,
       slotDate: docSlots[slotDateIndex][slotTimeIndex].datetime
@@ -107,6 +116,7 @@ const Appointments = () => {
       );
       if (data.success) {
         toast.success(data.message);
+        navigate("/my-appointments");
       } else {
         toast.error(data.message);
       }
