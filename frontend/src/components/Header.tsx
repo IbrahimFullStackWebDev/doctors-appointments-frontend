@@ -1,4 +1,3 @@
-import React from "react";
 import { assets, specialityData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { type SpecialityItem } from "../types/index";
@@ -24,7 +23,11 @@ const Header = () => {
           </div>
           <button
             className="px-8 py-3 rounded-full bg-white cursor-pointer flex flex-row items-center text-black gap-3"
-            onClick={() => scrollTo(0, 500)}
+            onClick={() =>
+              document
+                .getElementById("speciality")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
           >
             Book appointment <img src={assets.arrow_icon} alt="arrow icon" />
           </button>
@@ -52,7 +55,12 @@ const Header = () => {
                 window.scrollTo(0, 0);
               }}
             >
-              <img src={item.image} className="w-25" alt="speciality image" />
+              <img
+                src={item.image}
+                id="speciality"
+                className="w-25"
+                alt={item.speciality}
+              />
               <p className="text-gray-700 text-sm">{item.speciality}</p>
             </div>
           ))}
