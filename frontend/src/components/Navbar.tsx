@@ -47,7 +47,7 @@ const Navbar = () => {
               className="hidden lg:block"
               alt="dropdown icon"
             />
-            <div className="w-[200px] hidden z-index-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-12 right-0 group-hover:flex">
+            <div className="w-[200px] hidden z-20 flex flex-col items-start gap-3 text-gray-500 font-medium p-4 bg-gray-50 rounded-lg absolute top-12 right-0 group-hover:flex">
               <p
                 className="hover:text-gray-900 transition-all duration-300"
                 onClick={() => navigate("/profile")}
