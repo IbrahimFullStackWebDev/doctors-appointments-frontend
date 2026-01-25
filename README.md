@@ -11,15 +11,14 @@ This is the frontend of a modern Doctor Appointment Booking System. Built with s
 - **Routing** React Router 7
 - **API Client** Axios
 
-## 🛠️ Features (In Progress)
+## ✨ Key Features Implemented
 
-- [ ] 3 Level of Authentication:
-
+- [1] 3 Level of Authentication:
   - 1st one for Patients, so the patient can login on the website and, book an appointment with doctor and manage the booked appointment and also manage his/her profile.
   - 2nd noe for the doctor login, so that doctor can login and check the appointments and his/her earnings.Doctor can update his/her profile also.
   - 3rd for Admin login where the Admin can manages the appointments and also manage doctor's profile.
 
-- [ ] Integrate the online payment gateways, so the user can pay the appointment fees online on the website.
+- [2] Integrate the online payment gateways, so the user can pay the appointment fees online on the website.
 
 ## 📂 Project Structure
 
@@ -52,6 +51,11 @@ src/
 ```bash
   npm run dev
 ```
+
+## 🌐 Environment Variables
+
+Create a `.env` file in the root directory and add:
+`VITE_BACKEND_URL=your_backend_api_url`
 
 ## Learning Journey
 
