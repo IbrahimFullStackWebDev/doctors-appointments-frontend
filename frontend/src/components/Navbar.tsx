@@ -3,11 +3,12 @@ import { assets } from "../assets/assets.ts";
 import { NavLink, useNavigate } from "react-router-dom";
 import { type NavItems } from "../types/index.ts";
 import { useAppContext } from "../context/AppContext.tsx";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { uToken, setUToken, userInfo } = useAppContext();
+  const { uToken, setUToken, userInfo, setUserInfo } = useAppContext();
 
   const navitems: NavItems[] = [
     { path: "/", label: "HOME" },
@@ -60,11 +61,13 @@ const Navbar = () => {
               <p
                 className="hover:text-gray-900 transition-all duration-300"
                 onClick={() => {
-                  setUToken(null);
                   navigate("/");
+                  setUToken(null);
+                  setUserInfo(null);
                   localStorage.removeItem("uToken");
                   localStorage.removeItem("userInfo");
                   setShowMenu(false);
+                  toast.success("Logged out successfully");
                 }}
               >
                 Logout

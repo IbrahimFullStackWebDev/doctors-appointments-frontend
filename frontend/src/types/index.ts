@@ -47,7 +47,7 @@ export interface AppContextType {
   uToken: string;
   setUToken: (uToken: string | null) => void;
   doctors: DoctorDataType[];
-  setUserInfo: React.Dispatch<React.SetStateAction<UserType>>;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserType | null>>;
   userInfo: UserType;
 }
 
