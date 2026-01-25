@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import Appointments from "./pages/Appointments";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -21,8 +22,22 @@ function App() {
         <Route path="/doctors/:speciality?" element={<Doctors />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/my-appointments" element={<MyAppointments />} />
-        <Route path="/profile" element={<MyProfile />} />
+        <Route
+          path="/my-appointments"
+          element={
+            <ProtectedRoute>
+              <MyAppointments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/appointments/:docId?" element={<Appointments />} />
       </Routes>
