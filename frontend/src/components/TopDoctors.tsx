@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { type DoctorDataType } from "../types/index";
 import { useAppContext } from "../context/AppContext";
