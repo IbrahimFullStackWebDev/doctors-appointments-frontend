@@ -26,7 +26,7 @@ const Doctors = () => {
             <p
               key={item.id}
               className={`px-14 py-2 text-sm text-gray-700 border border-gray-300 rounded-md w-full text-left pl-2 cursor-pointer ${
-                speciality === item.speciality ? "bg-blue-100" : ""
+                speciality === item.speciality ? "bg-blue-100 shadow-lg" : ""
               }`}
               onClick={() =>
                 speciality === item.speciality
@@ -43,7 +43,10 @@ const Doctors = () => {
             <div
               key={item.id}
               className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-              onClick={() => navigate("/appointments/" + item.id)}
+              onClick={() => {
+                navigate("/appointments/" + item.id);
+                window.scrollTo(0, 0);
+              }}
             >
               <img
                 src={item.image}
