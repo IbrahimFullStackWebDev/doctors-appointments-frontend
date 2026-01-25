@@ -22,7 +22,7 @@ const Header = () => {
             </p>
           </div>
           <button
-            className="px-8 py-3 rounded-full bg-white cursor-pointer flex flex-row items-center text-black gap-3"
+            className="px-8 py-3 rounded-full bg-white cursor-pointer flex flex-row items-center text-black gap-3 hover:bg-gray-100 shadow-lg"
             onClick={() =>
               document
                 .getElementById("speciality")

@@ -1,9 +1,10 @@
-import React from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const Banner = () => {
   const navigate = useNavigate();
+  const { uToken } = useAppContext();
   return (
     <div className="flex flex-row items-center justify-between bg-blue-500 rounded-lg p-10 lg:px-12 lg:py-0">
       {/* lsft side */}
@@ -13,13 +14,13 @@ const Banner = () => {
           With 100+ Trusted Doctors
         </h4>
         <button
-          className="px-10 py-4 bg-white rounded-full text-gray-900 cursor-pointer"
+          className="px-10 py-4 bg-white rounded-full text-gray-900 cursor-pointer hover:bg-gray-100 shadow-lg"
           onClick={() => {
-            navigate("/login");
+            navigate(uToken ? "/doctors" : "/login");
             scrollTo(0, 0);
           }}
         >
-          Create an account
+          {uToken ? "Book an appointment now" : "Create an account"}
         </button>
       </div>
       <img
