@@ -25,7 +25,7 @@ const Banner = () => {
       </div>
       <img
         src={assets.appointment_img}
-        className="w-100 hidden lg:block"
+        className="w-100 hidden bg-blue-500 lg:block"
         alt=""
       />
     </div>

@@ -9,7 +9,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { uToken, setUToken, userInfo, setUserInfo } = useAppContext();
-  console.log(userInfo);
 
   const navitems: NavItems[] = [
     { path: "/", label: "HOME" },

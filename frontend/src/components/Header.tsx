@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 const Header = () => {
   return (
     <header className="flex flex-col items-center gap-10">
-      <div className="w-full bg-blue-500 text-white flex flex-col lg:flex-row items-end justify-between mt-8 rounded-lg pt-25 px-4">
+      <div className="w-full bg-blue-500 text-white flex flex-col lg:flex-row items-end justify-between mt-8 rounded-lg px-4">
         {/* Left Side */}
         <div className="flex flex-col items-start gap-8 m-auto lg:mb-20">
           <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
@@ -32,7 +32,7 @@ const Header = () => {
         {/* Right Side */}
         <img
           src={assets.header_img}
-          className="w-70 sm:w-120 m-auto lg:mb-0"
+          className="w-70 sm:w-120 m-auto lg:mb-0 bg-blue-500 "
           alt="header image"
         />
       </div>
