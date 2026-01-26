@@ -1,4 +1,3 @@
-import React from "react";
 import { specialityData } from "../assets/assets";
 import { useNavigate, useParams } from "react-router-dom";
 import { type DoctorDataType, type SpecialityItem } from "../types/index";

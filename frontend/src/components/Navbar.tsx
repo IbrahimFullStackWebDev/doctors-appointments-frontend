@@ -36,7 +36,14 @@ const Navbar = () => {
               <hr className="w-full border-none h-0.5 bg-gray-500 hidden" />
             </NavLink>
           ))}
+          <a
+            className="border py-1 px-2 text-sm rounded-full border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300"
+            href="https://doctors-appointments-admin-8v9p.onrender.com"
+          >
+            Admin
+          </a>
         </ul>
+
         {uToken ? (
           <div className="flex flex-row items-center gap-3 px-4 cursor-pointer relative group">
             <img
