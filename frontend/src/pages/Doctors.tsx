@@ -39,39 +39,45 @@ const Doctors = () => {
           ))}
         </div>
         <div className="w-full flex-5 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-          {filterdDoctors.map((item) => (
-            <div
-              key={item.id}
-              className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-              onClick={() => {
-                navigate("/appointments/" + item.id);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <img
-                src={item.image}
-                className="bg-blue-100 rounded-lg hover:bg-blue-500 transition-all duration-500"
-                alt="doctor image"
-              />
-              <div className="flex flex-col items-start gap-2 px-4">
-                <div className="flex flex-row items-center gap-2">
-                  {item.available ? (
-                    <>
-                      <div className="p-1 rounded-full bg-green-500"></div>
-                      <p className="text-sm text-gray-500">Available</p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="p-1 rounded-full bg-red-500"></div>
-                      <p className="text-sm text-gray-500">Unavailable</p>
-                    </>
-                  )}
+          {filterdDoctors.length > 0 ? (
+            filterdDoctors.map((item) => (
+              <div
+                key={item.id}
+                className="w-full flex flex-col items-start gap-4 pb-4 border border-gray-300 rounded-lg cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                onClick={() => {
+                  navigate("/appointments/" + item.id);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <img
+                  src={item.image}
+                  className="bg-blue-100 rounded-lg hover:bg-blue-500 transition-all duration-500"
+                  alt="doctor image"
+                />
+                <div className="flex flex-col items-start gap-2 px-4">
+                  <div className="flex flex-row items-center gap-2">
+                    {item.available ? (
+                      <>
+                        <div className="p-1 rounded-full bg-green-500"></div>
+                        <p className="text-sm text-gray-500">Available</p>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-1 rounded-full bg-red-500"></div>
+                        <p className="text-sm text-gray-500">Unavailable</p>
+                      </>
+                    )}
+                  </div>
+                  <p className="text-xl">{item.name}</p>
+                  <p className="text-gray-500">{item.speciality}</p>
                 </div>
-                <p className="text-xl">{item.name}</p>
-                <p className="text-gray-500">{item.speciality}</p>
               </div>
+            ))
+          ) : (
+            <div className="p-10 animate-pulse text-gray-400">
+              Loading Doctors...
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
