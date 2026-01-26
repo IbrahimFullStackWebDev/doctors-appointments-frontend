@@ -39,6 +39,8 @@ const Navbar = () => {
           <a
             className="border py-1 px-2 text-sm rounded-full border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300"
             href="https://doctors-appointments-admin-8v9p.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Admin
           </a>
@@ -48,7 +50,7 @@ const Navbar = () => {
           <div className="flex flex-row items-center gap-3 px-4 cursor-pointer relative group">
             <img
               className="hidden lg:block w-10 rounded-full"
-              src={userInfo.image || assets.upload_area}
+              src={userInfo?.image || assets.upload_area}
               alt="profile image"
             />
             <img
