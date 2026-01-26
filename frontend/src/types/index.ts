@@ -70,7 +70,7 @@ export interface ResponseType {
   userAppointments?: UserAppointmentInfo[];
 }
 export interface BookAppointmentsType {
-  id: number;
+  id?: number;
   userId?: number;
   doctorId: number;
   slotDate: string;

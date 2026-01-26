@@ -14,31 +14,41 @@ const MyAppointments = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const success = searchParams.get("success");
   const appointmentId = searchParams.get("appointmentId");
-
-  const getUserAppointments = async () => {
-    try {
-      const { data } = await axios.post<ResponseType>(
-        `${backendUrl}/api/user/appointments`,
-        {},
-        { headers: { uToken: uToken } },
-      );
-      if (data.success) {
-        setAppointments(data.userAppointments);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      const err = error as Error;
-      toast.error(err.message);
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+
+    const getUserAppointments = async () => {
+      try {
+        const { data } = await axios.post<ResponseType>(
+          `${backendUrl}/api/user/appointments`,
+          {},
+          { headers: { uToken } },
+        );
+
+        if (isMounted) {
+          if (data.success) {
+            setAppointments(data.userAppointments);
+          } else {
+            toast.error(data.message);
+          }
+        }
+      } catch (error) {
+        if (isMounted) {
+          const err = error as Error;
+          toast.error(err.message);
+          console.log(error);
+        }
+      }
+    };
+
     if (uToken) {
       getUserAppointments();
     }
-  }, [uToken]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [uToken, backendUrl, setAppointments]);
 
   const updatePaymentStatus = async () => {
     try {
@@ -72,9 +82,17 @@ const MyAppointments = () => {
   };
 
   useEffect(() => {
-    if (success && appointmentId && uToken) {
-      updatePaymentStatus();
-    }
+    const syncPayment = async () => {
+      if (success === "true" && appointmentId && uToken) {
+        try {
+          await updatePaymentStatus();
+        } catch (err) {
+          console.error("Payment sync error:", err);
+        }
+      }
+    };
+
+    syncPayment();
   }, [success, appointmentId, uToken]);
 
   const payStripe = async (appointmentId: number, doctorName: string) => {
@@ -183,7 +201,7 @@ const MyAppointments = () => {
                       <button
                         onClick={() =>
                           payStripe(
-                            item.AppointmentsInfo.id,
+                            item.AppointmentsInfo.id as number,
                             item.doctorInfo.name,
                           )
                         }
@@ -193,7 +211,7 @@ const MyAppointments = () => {
                       </button>
                       <button
                         onClick={() => {
-                          setSelectedId(item.AppointmentsInfo.id);
+                          setSelectedId(item.AppointmentsInfo.id as number);
                           setShowModal(true);
                         }}
                         className="flex-1 w-full py-2 px-10 border text-sm text-gray-700 rounded-md border-gray-300  hover:text-white hover:bg-red-500 transition-all duration-300 cursor-pointer"

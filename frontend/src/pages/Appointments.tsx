@@ -24,13 +24,14 @@ const Appointments = () => {
   const navigate = useNavigate();
 
   const filterdDoctors: DoctorDataType[] =
-    docId &&
-    doctors.filter(
-      (item) =>
-        item.speciality.toLocaleLowerCase() ===
-          doctorInfo?.speciality.toLocaleLowerCase() &&
-        item.id.toString() !== docId,
-    );
+    (docId &&
+      doctors.filter(
+        (item) =>
+          item.speciality.toLocaleLowerCase() ===
+            doctorInfo?.speciality.toLocaleLowerCase() &&
+          item.id.toString() !== docId,
+      )) ||
+    [];
   const daysOfWeek: string[] = [
     "SUN",
     "MON",
@@ -40,10 +41,6 @@ const Appointments = () => {
     "FRI",
     "SAT",
   ];
-
-  useEffect(() => {
-    setSlotTimeIndex(0);
-  }, [slotDateIndex]);
 
   useEffect(() => {
     const getSlots = () => {
@@ -177,6 +174,7 @@ const Appointments = () => {
                   <div
                     onClick={() => {
                       setSlotDateIndex(index);
+                      setSlotTimeIndex(0);
                     }}
                     key={index}
                     className={`min-w-16 flex flex-col items-center border gap-1 border-gray-300 py-6 px-3 rounded-full cursor-pointer transition-all duration-300 ${
@@ -192,7 +190,9 @@ const Appointments = () => {
               {docSlots.length > 0 &&
                 docSlots[slotDateIndex].map((item, index) => (
                   <div
-                    onClick={() => setSlotTimeIndex(index)}
+                    onClick={() => {
+                      setSlotTimeIndex(index);
+                    }}
                     key={index}
                     className={`flex-shrink-0 flex flex-col items-center border gap-1 border-gray-300 py-3 px-8 rounded-full cursor-pointer transition-all duration-300 ${
                       slotTimeIndex === index ? "bg-blue-500 text-white" : ""
