@@ -10,7 +10,7 @@ import {
   type DoctorDataType,
   type ResponseType,
   type UserType,
-} from "../types/index.tsx";
+} from "../types/index.ts";
 import axios from "axios";
 import { toast } from "react-toastify";
 const AppContext = createContext<AppContextType | undefined>(undefined);
