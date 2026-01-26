@@ -26,7 +26,18 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex flex-row items-center justify-between  py-4 border-b border-gray-500">
-        <img src={assets.logo} className="w-45" alt="Logo" />
+        <div className="flex flex-row items-center gap-6">
+          <img src={assets.logo} className="w-45" alt="Logo" />
+          <a
+            className="lg:hidden border py-1 px-2 text-sm rounded-full border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300"
+            href="https://doctors-appointments-admin-8v9p.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Admin
+          </a>
+        </div>
+
         <ul className="hidden lg:flex flex-row items-center gap-6 text-gray-700">
           {navitems.map((item, index) => (
             <NavLink key={index} to={item.path}>
@@ -120,6 +131,7 @@ const Navbar = () => {
               </p>
             </NavLink>
           ))}
+
           {uToken &&
             userMenuItem.map((item) => (
               <NavLink
