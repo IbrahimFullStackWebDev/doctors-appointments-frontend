@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [status, setStatus] = useState<string>("login");
   const [loading, setLoading] = useState<boolean>(false);
-  const { backendUrl, setUToken, setUserInfo, userInfo } = useAppContext();
+  const { backendUrl, setUToken, setUserInfo } = useAppContext();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
