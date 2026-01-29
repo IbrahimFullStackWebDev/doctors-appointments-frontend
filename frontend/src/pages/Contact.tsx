@@ -37,6 +37,8 @@ const Contact = () => {
             <a
               href="tel:+967778099847"
               className="hover:text-blue-600 transition-all duration-300 flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <span className="text-lg">📞</span>Tel: +967-778-099-847
             </a>
