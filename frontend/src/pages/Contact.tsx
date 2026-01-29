@@ -54,9 +54,12 @@ const Contact = () => {
           <p className="text-sm text-gray-500">
             Learn more about our teams and job openings.
           </p>
-          <button className="px-6 py-4 border hover:bg-black hover:text-white cursor-pointer transition-all duration-300">
+          <a
+            href="https://www.linkedin.com/in/ibrahim-al-herby-18919637b/"
+            className="px-6 py-4 border hover:bg-black hover:text-white cursor-pointer transition-all duration-300"
+          >
             Contact the Developer
-          </button>
+          </a>
         </div>
       </div>
       {showGoogleMap && (
