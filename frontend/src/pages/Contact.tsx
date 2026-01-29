@@ -37,8 +37,6 @@ const Contact = () => {
             <a
               href="tel:+967778099847"
               className="hover:text-blue-600 transition-all duration-300 flex items-center gap-2"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <span className="text-lg">📞</span>Tel: +967-778-099-847
             </a>
@@ -59,6 +57,8 @@ const Contact = () => {
           <a
             href="https://www.linkedin.com/in/ibrahim-al-herby-18919637b/"
             className="px-6 py-4 border hover:bg-black hover:text-white cursor-pointer transition-all duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Contact the Developer
           </a>
